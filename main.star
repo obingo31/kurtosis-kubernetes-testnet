@@ -21,6 +21,25 @@ def run(plan, args):
     if args:
         config.update(args)
     
+    # Validate configuration
+    if "num_nodes" in config:
+        if type(config["num_nodes"]) != "int":
+            fail("num_nodes must be an integer")
+        if config["num_nodes"] < 1:
+            fail("num_nodes must be at least 1")
+        if config["num_nodes"] > 100:
+            fail("num_nodes cannot exceed 100 (resource limit)")
+    
+    if "network_name" in config:
+        if type(config["network_name"]) != "string":
+            fail("network_name must be a string")
+        if len(config["network_name"]) == 0:
+            fail("network_name cannot be empty")
+    
+    if "enable_monitoring" in config:
+        if type(config["enable_monitoring"]) != "bool":
+            fail("enable_monitoring must be a boolean")
+    
     plan.print("Starting Kubernetes testnet setup...")
     plan.print("Configuration: " + str(config))
     
