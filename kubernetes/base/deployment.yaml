@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kurtosis-engine
+  namespace: kurtosis
+  labels:
+    app: kurtosis
+    component: engine
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kurtosis
+      component: engine
+  template:
+    metadata:
+      labels:
+        app: kurtosis
+        component: engine
+    spec:
+      serviceAccountName: kurtosis-engine
+      containers:
+        - name: engine
+          image: kurtosistech/engine:latest
+          imagePullPolicy: Always
+          ports:
+            - name: grpc
+              containerPort: 9710
+              protocol: TCP
+            - name: http
+              containerPort: 9711
+              protocol: TCP
+          env:
+            - name: KURTOSIS_BACKEND_TYPE
+              value: "kubernetes"
+            - name: KURTOSIS_CLUSTER_TYPE
+              value: "kubernetes"
+            - name: LOG_LEVEL
+              value: "info"
+          volumeMounts:
+            - name: config
+              mountPath: /etc/kurtosis
+              readOnly: true
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+          livenessProbe:
+            tcpSocket:
+              port: grpc
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            tcpSocket:
+              port: grpc
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+      volumes:
+        - name: config
+          configMap:
+            name: kurtosis-engine-config

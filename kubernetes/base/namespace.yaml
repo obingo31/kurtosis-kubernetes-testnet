@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kurtosis
+  labels:
+    name: kurtosis
+    app: kurtosis
