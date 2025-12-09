@@ -1,6 +1,3 @@
-# Large testnet with monitoring
-# Run with: kurtosis run github.com/obingo31/kurtosis-kubernetes-testnet --args-file examples/large-with-monitoring.json
-
 {
   "num_nodes": 10,
   "network_name": "large-testnet",
