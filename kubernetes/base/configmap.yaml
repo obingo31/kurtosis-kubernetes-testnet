@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kurtosis-engine-config
+  namespace: kurtosis
+  labels:
+    app: kurtosis
+    component: engine
+data:
+  # Kurtosis Engine configuration
+  engine-config.yml: |
+    # Log level for the engine (debug, info, warn, error)
+    log-level: info
+    
+    # Default enclave configuration
+    default-enclave-config:
+      # CPU limits for enclave containers
+      cpu-limit: "1000m"
+      # Memory limits for enclave containers
+      memory-limit: "1Gi"
+    
+    # Engine API server configuration
+    api-server:
+      # Port for the gRPC API server
+      grpc-port: 9710
+      # Port for the HTTP gateway
+      http-port: 9711

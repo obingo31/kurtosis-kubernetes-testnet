@@ -1,0 +1,16 @@
+apiVersion: v2
+name: kurtosis
+description: A Helm chart for deploying Kurtosis on Kubernetes
+type: application
+version: 0.1.0
+appVersion: "latest"
+keywords:
+  - kurtosis
+  - testing
+  - development
+home: https://www.kurtosis.com/
+sources:
+  - https://github.com/kurtosis-tech/kurtosis
+maintainers:
+  - name: Kurtosis Community
+    url: https://github.com/kurtosis-tech/kurtosis

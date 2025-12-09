@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "kurtosis.fullname" . }}-config
+  labels:
+    {{- include "kurtosis.labels" . | nindent 4 }}
+data:
+  engine-config.yml: |
+    log-level: {{ .Values.config.logLevel }}
+    
+    default-enclave-config:
+      cpu-limit: {{ .Values.config.defaultEnclaveConfig.cpuLimit | quote }}
+      memory-limit: {{ .Values.config.defaultEnclaveConfig.memoryLimit | quote }}
+    
+    api-server:
+      grpc-port: {{ .Values.config.apiServer.grpcPort }}
+      http-port: {{ .Values.config.apiServer.httpPort }}

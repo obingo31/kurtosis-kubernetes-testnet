@@ -1,0 +1,103 @@
+# Default values for kurtosis.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: kurtosistech/engine
+  pullPolicy: Always
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "kurtosis-engine"
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  grpcPort: 9710
+  httpPort: 9711
+
+loadBalancer:
+  enabled: true
+  annotations: {}
+
+ingress:
+  enabled: false
+  className: "nginx"
+  annotations: {}
+    # nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+  hosts:
+    - host: kurtosis.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+  #  - secretName: kurtosis-tls
+  #    hosts:
+  #      - kurtosis.example.com
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+
+livenessProbe:
+  tcpSocket:
+    port: grpc
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+readinessProbe:
+  tcpSocket:
+    port: grpc
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  timeoutSeconds: 3
+  failureThreshold: 3
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+config:
+  logLevel: info
+  defaultEnclaveConfig:
+    cpuLimit: "1000m"
+    memoryLimit: "1Gi"
+  apiServer:
+    grpcPort: 9710
+    httpPort: 9711
+
+env:
+  - name: KURTOSIS_BACKEND_TYPE
+    value: "kubernetes"
+  - name: KURTOSIS_CLUSTER_TYPE
+    value: "kubernetes"
+  - name: LOG_LEVEL
+    value: "info"

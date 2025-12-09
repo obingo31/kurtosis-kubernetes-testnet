@@ -1,0 +1,21 @@
+# Helm
+*.tgz
+charts/
+
+# Kubernetes
+*.kubeconfig
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Logs
+*.log
