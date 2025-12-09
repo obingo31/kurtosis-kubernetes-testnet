@@ -1,0 +1,7 @@
+# Minimal Configuration
+# Run with: kurtosis run github.com/obingo31/kurtosis-kubernetes-testnet --args-file examples/minimal.json
+
+{
+  "num_nodes": 1,
+  "network_name": "minimal-testnet"
+}
