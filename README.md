@@ -21,6 +21,22 @@ This Kurtosis package provides a simple way to create a reproducible Kubernetes 
 
 ## Quick Start
 
+### Using the Quick Start Script
+
+For a guided setup, use the included script:
+
+```bash
+./quickstart.sh
+```
+
+This script will:
+- Check if Kurtosis is installed
+- Verify Docker is running
+- Show usage examples
+- Optionally run the testnet
+
+### Manual Quick Start
+
 To run the Kubernetes testnet with default settings (3 nodes):
 
 ```bash
