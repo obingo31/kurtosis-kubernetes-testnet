@@ -14,6 +14,8 @@ Deploy Kurtosis to your Kubernetes cluster:
 kubectl apply -f kubernetes/base/
 ```
 
+**New to this?** Check out the [Quickstart Guide](QUICKSTART.md) for a step-by-step walkthrough!
+
 For detailed installation instructions, configuration options, and troubleshooting, see the [Kubernetes Installation Guide](kubernetes/README.md).
 
 ## Repository Structure
@@ -21,16 +23,29 @@ For detailed installation instructions, configuration options, and troubleshooti
 ```
 .
 ├── README.md                    # This file
-└── kubernetes/
-    ├── README.md               # Detailed installation guide
-    └── base/
-        ├── namespace.yaml      # Kurtosis namespace
-        ├── serviceaccount.yaml # Service account for engine
-        ├── rbac.yaml          # RBAC permissions
-        ├── configmap.yaml     # Engine configuration
-        ├── deployment.yaml    # Kurtosis engine deployment
-        ├── service.yaml       # Services for API access
-        └── kustomization.yaml # Kustomize configuration
+├── QUICKSTART.md               # 5-minute deployment guide
+├── CONTRIBUTING.md             # Customization and contribution guide
+├── deploy.sh                   # Automated deployment script
+├── kubernetes/
+│   ├── README.md               # Detailed installation guide
+│   └── base/
+│       ├── namespace.yaml      # Kurtosis namespace
+│       ├── serviceaccount.yaml # Service account for engine
+│       ├── rbac.yaml          # RBAC permissions
+│       ├── configmap.yaml     # Engine configuration
+│       ├── deployment.yaml    # Kurtosis engine deployment
+│       ├── service.yaml       # Services for API access
+│       └── kustomization.yaml # Kustomize configuration
+├── helm/
+│   └── kurtosis/              # Helm chart for Kurtosis
+│       ├── Chart.yaml
+│       ├── values.yaml
+│       ├── README.md
+│       └── templates/
+└── examples/
+    ├── nodeport-service.yaml  # NodePort service example
+    ├── ingress.yaml           # Ingress configuration example
+    └── *.md                   # Example documentation
 ```
 
 ## What's Included
@@ -40,6 +55,9 @@ For detailed installation instructions, configuration options, and troubleshooti
 - **Deployment**: Kurtosis engine with configurable resources
 - **Services**: Both ClusterIP and LoadBalancer for flexible access
 - **Configuration**: ConfigMap for engine settings
+- **Helm Chart**: Alternative deployment method with customizable values
+- **Examples**: NodePort and Ingress configurations
+- **Scripts**: Automated deployment script for quick setup
 
 ## Prerequisites
 
@@ -49,7 +67,11 @@ For detailed installation instructions, configuration options, and troubleshooti
 
 ## Documentation
 
+- [Quickstart Guide](QUICKSTART.md) - Get started in 5 minutes
 - [Kubernetes Installation Guide](kubernetes/README.md) - Complete installation and configuration guide
+- [Helm Chart Documentation](helm/kurtosis/README.md) - Helm-based deployment
+- [Contributing Guide](CONTRIBUTING.md) - How to customize and extend
+- [Examples](examples/) - NodePort, Ingress, and other configurations
 - [Kurtosis Official Documentation](https://docs.kurtosis.com/) - Kurtosis platform documentation
 
 ## Support
