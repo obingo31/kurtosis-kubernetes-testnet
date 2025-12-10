@@ -1,0 +1,22 @@
+optimism_package:
+  observability:
+    enabled: true
+    enable_k8s_features: true
+    grafana_params:
+      dashboard_sources:
+        - github.com/ethereum-optimism/grafana-dashboards-public/resources
+        - github.com/op-rs/kona/docker/recipes/kona-node/grafana
+
+  chains:
+    chain0:
+      participants:
+        node0:
+          el_builder:
+            type: op-rbuilder
+          cl_builder:
+            type: op-node
+      # mev_params:
+      #   enabled: true
+      #   image: flashbots/rollup-boost:0.7.4
+      #   builder_host: localhost
+      #   builder_port: "8545"

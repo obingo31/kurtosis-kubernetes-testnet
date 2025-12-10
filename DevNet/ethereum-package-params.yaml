@@ -1,0 +1,35 @@
+participants:
+  - el_type: geth
+    el_image: ethereum/client-go:latest
+    el_log_level: ''
+    el_extra_params: []
+    cl_type: lighthouse
+    cl_image: sigp/lighthouse:latest
+    cl_log_level: ''
+    cl_extra_params: []
+    builder_network_params: null
+    count: 16
+network_params:
+  network_id: '3151908'
+  deposit_contract_address: '0x4242424242424242424242424242424242424242'
+  seconds_per_slot: 12
+  num_validator_keys_per_node: 128
+  preregistered_validator_keys_mnemonic: 'giant issue aisle success illegal bike spike question tent bar rely arctic volcano long crawl hungry vocal artwork sniff fantasy very lucky have athlete'
+  deneb_fork_epoch: 500
+  electra_fork_epoch: 18446744073709551615
+  fulu_fork_epoch: 18446744073709551615
+  # Disable blob parameters since Fulu is disabled
+  bpo_1_epoch: 18446744073709551615
+  bpo_2_epoch: 18446744073709551615
+  bpo_3_epoch: 18446744073709551615
+  bpo_4_epoch: 18446744073709551615
+  bpo_5_epoch: 18446744073709551615
+  # Withdrawal settings
+  withdrawal_type: 0x01
+  withdrawal_address: null
+  validator_balance: 32000000000
+  # Data column sidecars settings
+  min_epochs_for_data_column_sidecars_requests: 0
+  min_epochs_for_block_requests: 0
+global_log_level: info
+mev_type: mock

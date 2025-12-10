@@ -1,0 +1,24 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+  folder: kurtosis
+  name: overview
+spec:
+  title: Kurtosis Overview
+  uid: overview
+  tags:
+    - kurtosis
+    - overview
+  schemaVersion: 27
+  panels: []
+  time:
+    from: now-1h
+    to: now
+  timepicker: {}
+  templating:
+    list: []
+  annotations:
+    list: []
+  refresh: 5s
+  version: 0
+  links: []

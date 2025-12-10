@@ -1,0 +1,62 @@
+# Example: Optimism L2 with Custom Hard Fork Transitions
+# This demonstrates how to configure Optimism L2 chains with specific hard fork transitions
+
+optimism_package:
+  # Enable observability for monitoring the L2 network (optional)
+  # observability:
+  #   enabled: true
+  #   enable_k8s_features: true
+  #   grafana_params:
+  #     dashboard_sources:
+  #       - github.com/ethereum-optimism/grafana-dashboards-public/resources
+
+  # L2 Chain Configuration with Hard Fork Transitions
+  chains:
+    opkurtosis:
+      participants:
+        node0:
+          el:
+            type: op-geth
+            image: "us-docker.pkg.dev/oplabs-tools-artifacts/images/op-geth:v1.101413.1"
+          cl:
+            type: op-node
+            image: "us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.3.0"
+        node1:
+          el:
+            type: op-geth
+            image: "us-docker.pkg.dev/oplabs-tools-artifacts/images/op-geth:v1.101413.1"
+          cl:
+            type: op-node
+            image: "us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.3.0"
+      
+      # Network parameters with hard fork transitions
+      network_params:
+        network_id: "42069"
+        # Hard fork activation times (seconds after L2 genesis)
+        fjord_time_offset: 0         # Fjord activates at genesis
+        granite_time_offset: 0       # Granite activates at genesis
+        holocene_time_offset: 3600   # Holocene activates after 1 hour
+        isthmus_time_offset: 7200    # Isthmus activates after 2 hours
+      
+      # Optional: Blockscout block explorer
+      # blockscout_params:
+      #   enabled: true
+      
+      # Optional: MEV/Rollup Boost configuration
+      # mev_params:
+      #   enabled: true
+      #   image: "flashbots/rollup-boost:0.7.4"
+      #   builder_host: "localhost"
+      #   builder_port: "8545"
+
+# Optional: Include Ethereum L1 as the settlement layer
+ethereum_package:
+  participants:
+    - el_type: geth
+    - el_type: reth
+  network_params:
+    preset: minimal
+    genesis_delay: 5
+  additional_services:
+    - dora
+    - blockscout

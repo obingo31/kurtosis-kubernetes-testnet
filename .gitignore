@@ -1,0 +1,10 @@
+.kube/
+.vscode/
+
+# Logs and generated outputs
+*.log
+kurtosis-engine-logs--*/
+DevNet/kurtosis-engine-logs--*/
+
+# Downloaded artifacts
+*.deb

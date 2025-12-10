@@ -1,0 +1,67 @@
+# Example: Optimism L2 with Rollup Boost (MEV-Boost for L2)
+# This demonstrates how to configure Rollup Boost for external block building on L2
+
+optimism_package:
+  # observability:
+  #   enabled: true
+  #   enable_k8s_features: true
+  #   grafana_params:
+  #     dashboard_sources:
+  #       - github.com/ethereum-optimism/grafana-dashboards-public/resources
+
+  chains:
+    rollup-boost-testnet:
+      participants:
+        # Sequencer node with Rollup Boost sidecar
+        sequencer:
+          el:
+            type: op-geth
+            image: "us-docker.pkg.dev/oplabs-tools-artifacts/images/op-geth:v1.101413.1"
+          cl:
+            type: op-node
+            image: "us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.3.0"
+          # Optional: External block builder configuration
+          el_builder:
+            type: op-rbuilder
+          cl_builder:
+            type: op-node
+        
+        # Standard validator node (no builder)
+        validator1:
+          el:
+            type: op-geth
+            image: "us-docker.pkg.dev/oplabs-tools-artifacts/images/op-geth:v1.101413.1"
+          cl:
+            type: op-node
+            image: "us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.3.0"
+      
+      network_params:
+        network_id: "3151911"
+        fjord_time_offset: 0
+        granite_time_offset: 0
+        holocene_time_offset: 3600
+        isthmus_time_offset: 7200
+      
+      # MEV/Rollup Boost Configuration
+      mev_params:
+        enabled: true
+        image: "flashbots/rollup-boost:0.7.4"
+        # External builder configuration (optional)
+        # builder_host: "external-builder.example.com"
+        # builder_port: "8545"
+        # For local testing, you can use the built-in builder:
+        builder_host: "localhost"
+        builder_port: "8545"
+      
+      blockscout_params:
+        enabled: false
+
+# Settlement layer (Ethereum L1)
+ethereum_package:
+  participants:
+    - el_type: geth
+  network_params:
+    preset: minimal
+    genesis_delay: 5
+  additional_services:
+    - blockscout

@@ -1,0 +1,6 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Folder
+metadata:
+  name: kurtosis
+spec:
+  title: Kurtosis

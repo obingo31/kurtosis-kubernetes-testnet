@@ -1,0 +1,79 @@
+# Example: Multiple Optimism L2 Chains
+# This demonstrates how to configure and run multiple L2 networks simultaneously
+
+optimism_package:
+  # observability:
+  #   enabled: true
+  #   enable_k8s_features: true
+  #   grafana_params:
+  #     dashboard_sources:
+  #       - github.com/ethereum-optimism/grafana-dashboards-public/resources
+
+  # First L2 chain - mainnet-like configuration
+  chains:
+    op-mainnet-test:
+      participants:
+        sequencer:
+          el:
+            type: op-geth
+            image: "us-docker.pkg.dev/oplabs-tools-artifacts/images/op-geth:v1.101413.1"
+          cl:
+            type: op-node
+            image: "us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.3.0"
+        validator1:
+          el:
+            type: op-geth
+            image: "us-docker.pkg.dev/oplabs-tools-artifacts/images/op-geth:v1.101413.1"
+          cl:
+            type: op-node
+            image: "us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.3.0"
+      
+      network_params:
+        network_id: "3151909"
+        fjord_time_offset: 0
+        granite_time_offset: 0
+        holocene_time_offset: 3600
+        isthmus_time_offset: 7200
+      
+      # Optional: Blockscout block explorer
+      # blockscout_params:
+      #   enabled: true
+
+    # Second L2 chain - testnet-like configuration
+    op-testnet-test:
+      participants:
+        sequencer:
+          el:
+            type: op-geth
+            image: "us-docker.pkg.dev/oplabs-tools-artifacts/images/op-geth:v1.101413.1"
+          cl:
+            type: op-node
+            image: "us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.3.0"
+        validator1:
+          el:
+            type: op-geth
+            image: "us-docker.pkg.dev/oplabs-tools-artifacts/images/op-geth:v1.101413.1"
+          cl:
+            type: op-node
+            image: "us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.3.0"
+      
+      network_params:
+        network_id: "3151910"
+        fjord_time_offset: 0
+        granite_time_offset: 0
+        holocene_time_offset: 1800
+        isthmus_time_offset: 3600
+      
+      # Optional: Blockscout block explorer
+      # blockscout_params:
+      #   enabled: true
+
+# Settlement layer (Ethereum L1)
+ethereum_package:
+  participants:
+    - el_type: geth
+  network_params:
+    preset: minimal
+    genesis_delay: 5
+  additional_services:
+    - blockscout

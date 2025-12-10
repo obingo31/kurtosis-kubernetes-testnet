@@ -1,1 +1,0 @@
-# kurtosis-kubernetes-testnet
