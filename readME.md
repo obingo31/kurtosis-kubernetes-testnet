@@ -1,4 +1,10 @@
 # kurtosis-kubernetes-testnet 
+![Go](https://img.shields.io/badge/Go-Tooling-blue?style=for-the-badge&logo=go&logoColor=white)
+![Starlark](https://img.shields.io/badge/Starlark-Kurtosis%20pkg-5e5e5e?style=for-the-badge&logo=google&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-Backend-326ce5?style=for-the-badge&logo=kubernetes&logoColor=white)
+![Helm](https://img.shields.io/badge/Helm-Charts-0f1689?style=for-the-badge&logo=helm&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-orange?style=for-the-badge)
+
 > 🚧 Under construction: configs and docs are actively being tuned; expect rapid changes.
 
 Spin up reproducible Ethereum and Optimism devnets on Kubernetes (or kind) using [Kurtosis](https://docs.kurtosis.com/), with pre-wired observability and helper automation via `mise` and `just`.
@@ -19,8 +25,8 @@ Spin up reproducible Ethereum and Optimism devnets on Kubernetes (or kind) using
 - `DevNet/justfile` — shortcuts for grafana, ns-authz, enclave helpers
 
 ## 🧱 Tech stack
-- Go tooling managed via `mise` (for Kurtosis CLI, kind, Helm, kubectl)
+- Go tooling managed via `mise` (Kurtosis CLI, kind, Helm, kubectl)
 - Starlark packages for Kurtosis orchestration under `DevNet/`
 
 ## 📜 License
-Solidity Foundry License
+MIT
